@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10" 
+ 
+  >
+<!--   <LinearLayout  -->
+<!--     android:layout_width="match_parent" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:orientation="horizontal" -->
+<!--     android:weightSum="5" -->
+<!--     android:gravity="center" -->
+<!--     android:layout_marginTop="20dp" -->
+<!--     > -->
+
+<!--         <ImageView  -->
+<!--             android:id="@+id/settingsBtn" -->
+<!--             android:layout_width="0dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_weight="1" -->
+<!--             android:src="@drawable/settingsnew"/> -->
+        
+<!--         <TextView  -->
+<!--             android:id="@+id/btTitle" -->
+<!--             android:layout_width="0dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="3" -->
+<!--             android:text="@string/myPlanetsHeading" -->
+<!--             style="@style/headingText" -->
+<!--            /> -->
+        
+<!--          <ImageView  -->
+<!--             android:layout_width="0dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_weight="1" -->
+<!--             android:src="@drawable/info"/> -->
+              
+<!--     </LinearLayout> -->
+
+     
+     
+     <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/purpleText"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dp"
+        android:fadeScrollbars="true"
+        android:overScrollMode="always"
+        android:requiresFadingEdge="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

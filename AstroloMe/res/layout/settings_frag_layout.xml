@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ android:background="@drawable/backlogin" >
+  
+    <LinearLayout 
+        
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"      
+    android:weightSum="6">
+    
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:text="@string/action_settings"
+        android:gravity="center"
+        style="@style/headingText"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4"
+        android:text="tap to change"
+        style="@style/ListViewWhite"
+        android:gravity="center"/>
+  
+    <EditText 
+        android:id="@+id/settingsName"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:hint="@string/name"
+        android:textColor="@color/white"
+        style="@style/editTextInput"
+        android:singleLine="true"
+        android:textColorHint="@color/white"
+        android:gravity="bottom"
+        android:imeOptions="actionNext"
+        android:inputType="text"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" 
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp" >
+ 
+	    <Button
+	        android:id="@+id/settingsBirthday"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:hint="@string/enterBday"
+	        style="@style/splashText"
+	        android:textColorHint="@color/white"
+	        android:focusable="true"
+	       />
+		<Button
+	        android:id="@+id/settingsBirthTime"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"       
+	        android:hint="@string/enterBirthTime"
+	        style="@style/splashText"
+	        android:textColorHint="@color/white"
+	        android:onClick="showTimePickerDialog"
+	       />
+	</LinearLayout>
+	<TextView 
+	    android:id="@+id/settingsBTExpl"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight=".6"
+	    style="@style/Explanation"
+	    android:text="@string/settingsBirthTimeExpl"
+	    android:gravity="center"/>
+    
+    <AutoCompleteTextView
+        android:id="@+id/settingsBirthLocTV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:hint="@string/enterLoc"
+        android:singleLine="true"      
+        style="@style/splashText"
+        android:textColorHint="@color/white"
+        android:layout_marginTop="10dp"
+        android:gravity="bottom"
+        />
+
+
+    <EditText 
+        android:id="@+id/settingsEmail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".7"
+        android:hint="@string/enterEmail"
+        android:inputType="textEmailAddress"
+        style="@style/splashText18"
+        android:singleLine="true"
+        android:textColorHint="@color/white"
+        android:gravity="bottom"
+        />
+<TextView 
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight=".3"
+	    style="@style/Explanation"
+	    android:text="@string/emailExplan"
+	    android:gravity="center"/>
+
+
+<!--        <RadioGroup -->
+<!--         android:id="@+id/radioGender" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="0dp" -->
+<!--         android:layout_weight="1" -->
+<!--         android:layout_marginTop="20dp" > -->
+ 
+<!--         <RadioButton -->
+<!--             android:id="@+id/radioMale" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="@string/radio_male"  -->
+<!--             android:checked="true" -->
+<!--             style="@style/editTextInput" /> -->
+ 
+<!--         <RadioButton -->
+<!--             android:id="@+id/radioFemale" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="@string/radio_female" -->
+<!--             style="@style/editTextInput" /> -->
+ 
+<!--     </RadioGroup> -->
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight=".7"
+     android:padding="10dp" >
+		
+		 <Button
+           android:id="@+id/settingsCancel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"      
+           android:background="@drawable/cancel" />
+    
+       <Button
+           android:id="@+id/settingsDone"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"  
+           android:background="@drawable/done" />
+       
+    </RelativeLayout>
+
+       </LinearLayout>
+
+
+</RelativeLayout>
+

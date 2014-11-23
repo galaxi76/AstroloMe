@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  android:orientation="vertical"
+    android:background="@drawable/bbbback" 
+  >
+<!--      <TextView  -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:text="@string/myAspectsHeading" -->
+<!--         style="@style/headingText" -->
+<!--         android:gravity="center_horizontal" -->
+<!--          android:layout_marginTop="20dp" /> -->
+     
+     <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/purpleText"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dp"
+        android:fadeScrollbars="true"
+        android:overScrollMode="always"
+        android:requiresFadingEdge="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical" />
+</LinearLayout>

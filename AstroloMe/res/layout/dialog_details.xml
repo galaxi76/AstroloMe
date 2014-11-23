@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bbbback" 
+    android:gravity="center">
+    
+<!--    <ImageView  -->
+<!--        android:id="@+id/explanationDetail" -->
+<!--        android:layout_width="match_parent" -->
+<!--        android:layout_height="wrap_content" -->
+<!--        android:textStyle="@style/PurpleWhiteShadow" -->
+<!--        android:background="@drawable/details_button1" -->
+<!--        /> -->
+   
+   <Button android:id="@+id/ok"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:background="@drawable/horoicon"/>
+   
+
+
+</LinearLayout>

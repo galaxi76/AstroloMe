@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AstroloMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="loading">Loading...</string>
+    <string name="NoInternet">No internet available. Please check your conncetion and try again</string>
+   <string name="radio_male">Male</string>
+   <string name="radio_female">Female</string>
+   <string name="signUp">Sign Up</string>
+   <string name="name">Name</string>
+   <string name="enterBday">Enter birthday</string>
+      <string name="enterBirthTime">Enter birth time</string>
+       <string name="birthTimeExpl">12:00 will be set if time unknown</string>
+   <string name="emailExplan">Email will be used for account recovery</string>
+   <string name="spinningZodiac">spinningZodiac</string>
+   <string name="login">Login</string>
+   <string name="calculating">Calculating your Birth Chart</string>
+   <string name="enterLoc">Please enter your city of birth</string>
+   <string name="bdayMissing">Please enter your birth date</string>
+    <string name="enterEmail">Please enter your email</string>
+    <string name ="myBirthchartHeading">MY BIRTHCHART</string>
+     <string name ="myPlanetsHeading">MY PLANETS</string>
+      <string name ="myElementsHeading">MY ELEMENTS</string>
+       <string name ="myAspectsHeading">MY ASPECTS</string>
+    <string name ="birthChartExplanation">Your birthchart will uncover your natural abilities.   </string>
+    <string name="latin">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="latinShort">Lorem ipsum dolor sit amet, consectetur adipiscing elit... </string>
+    <string name="sunLeo">King of the Jungle, Leo knows how to... </string>
+     <string name="moonCancer">Intuitive, Spiritual and Sensitive... </string>
+     <string name="marsAries">Full Power and Headstrong Aries... </string>
+      <string name="sunLeoExpl">Sun 13 degress Leo</string>
+     <string name="moonCancerExpl">Moon 22 degrees Cancer </string>
+     <string name="marsAriesExpl">Mars 4 degrees Aries</string>
+     <string name="myHousesHeading">MY HOUSES</string>
+     <string name="settingsBirthTimeExpl">Your ascendant cannot be calculated without your birth time</string>
+</resources>

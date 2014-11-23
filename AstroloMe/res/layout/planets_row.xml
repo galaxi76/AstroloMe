@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp" >
+    
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+         >
+    
+     <TextView 
+            android:id="@+id/planetName" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PurpleWhiteShadow"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp"         
+            />
+     <TextView 
+            android:id="@+id/planetDegree" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PurpleWhiteShadow"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            
+            />
+     <TextView 
+            android:id="@+id/zodiacName" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PurpleWhiteShadow"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp"            
+            />
+     
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+    
+    <ImageView 
+        android:id="@+id/zodiacIcon"
+        android:layout_width="0dp"
+        android:layout_weight="1.4"
+        android:layout_height="match_parent"
+       android:layout_gravity="center"/>
+    
+    <TextView
+        android:id="@+id/planetExplanation"
+        android:layout_width="0dp"
+        android:layout_weight="7.5"
+        android:layout_marginLeft="6dp"
+        android:layout_height="match_parent"
+        android:gravity="left|center_horizontal"
+        android:maxLines="2"
+        android:ellipsize="marquee"
+        android:textColor="@color/purpleText"
+        android:textSize="18sp" />
+    
+    <Button
+        android:id="@+id/planetDetailsBtn"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/next_selector"
+        android:layout_marginLeft="10dp"
+        android:focusable="false"
+        />
+   
+    </LinearLayout>
+
+</LinearLayout>
+
