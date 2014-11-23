@@ -62,7 +62,7 @@ import android.widget.Toast;
 import com.astrolome.DatePickerFragment;
 
 public class RegisterActivity extends FragmentActivity implements ResponseManager{
-	//test checkin
+	//test checkin number 2 - working copy
 	Activity activity = this;
 	boolean is24hourFormat;
 	String deviceVersion;
