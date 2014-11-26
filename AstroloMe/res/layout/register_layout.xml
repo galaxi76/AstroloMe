@@ -84,20 +84,22 @@
 	    style="@style/Explanation"
 	    android:text="@string/birthTimeExpl"
 	    android:gravity="center"/>
-    
-    <AutoCompleteTextView
-        android:id="@+id/birthLocTV"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".8"
-        android:hint="@string/enterLoc"
-        android:singleLine="true"      
-        style="@style/splashText"
-        android:textColorHint="@color/white"
-        android:layout_marginTop="10dp"
-        android:gravity="bottom"
-        />
 
+	<AutoCompleteTextView
+	    android:id="@+id/birthLocTV"
+	    style="@style/splashText"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_marginTop="10dp"
+	    android:layout_weight=".8"
+	    android:ems="10"
+	    android:gravity="bottom"
+	    android:hint="@string/enterLoc"
+	    android:singleLine="true"
+	    android:textColorHint="@color/white" >
+
+	    <requestFocus />
+	</AutoCompleteTextView>
 
     <EditText 
         android:id="@+id/email"

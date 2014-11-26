@@ -1,6 +1,6 @@
 package com.astrolome;
 
-
+import static com.astrolome.Constants.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,46 +17,7 @@ import android.widget.Toast;
 public class SQLiteHelper {
 	
 	private static final String DATABASE_NAME = "BirthchartProfile";
-	private static final int DATABASE_VERSION = 21;
-	public static final String DB_TABLENAME_USER = "Table_User";
-	public static final String DB_TABLENAME_PLANETS = "Table_Planets";	
-	public static final String DB_TABLENAME_HOUSES = "Table_Houses";
-	public static final String DB_TABLENAME_ASPECTS = "Table_Aspects";
-
-		//Register values
-		public final static String KEY_ROW_ID = "_rowID";
-		public final static String KEY_UID = "_id";
-		public final static String KEY_DEVICE_UID = "_deviceuid";
-		public final static String KEY_DEVICE_MODEL = "_deviceModel";
-		public final static String KEY_DEVICE_VERSION = "_deviceVersion";
-		public final static String KEY_IS_ACTIVE = "_isActive";
-		public final static String KEY_NAME = "_fullName";
-		public final static String KEY_DOB = "_dob";
-		public final static String KEY_DATE_REG = "_dateReg";
-		public final static String KEY_BIRTH_LOCAL_ID = "_birthLocationId";
-		public final static String KEY_EMAIL = "_email";		
-		public final static String KEY_GENDER = "_gender";
-		public final static String KEY_ACTIONS_KEY = "_actionsKey";
-		public final static String KEY_PASSWORD = "_password";
-		
-//		Planets
-		public final static String KEY_PLANET_ID = "_planetID";
-		public final static String KEY_HOUSE_ID = "_houseID";
-		public final static String KEY_ZODIAC_ID = "_zodiacID";
-		public final static String KEY_DEGREES = "_degrees";
-		public final static String KEY_CONTENT = "_content";
-		public final static String KEY_FULL_ANGLE = "_fullAngle";
-		public final static String KEY_READ_DATE = "_readDate";
-		public final static String KEY_MINUTE_DEGREES = "_minuteDegrees";
-		public final static String KEY_RISING_ID = "_risingID";
-		public final static String KEY_SECONDS_DEGREES = "_secondsDegrees";
-		//houses
-		public final static String KEY_HOUSE_NAME = "_houseName";
-		//aspects
-
-		public final static String KEY_PLANETID_ONE = "_planetOne";
-		public final static String KEY_PLANETID_TWO = "_planetTwo";
-		public final static String KEY_TRANSIT_ID = "_transitID";
+	private static final int DATABASE_VERSION = 22;
 		
 		private DbHelper dbHelper;
 		private SQLiteDatabase sqlitedb;
@@ -117,8 +78,8 @@ public class SQLiteHelper {
 			private static final String CREATE_TABLE_ASPECTS = "create table "
 					 + DB_TABLENAME_ASPECTS + " (" +
 						KEY_ROW_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-						KEY_PLANETID_ONE + " TEXT, " +
-						KEY_PLANETID_TWO + " TEXT, " + 
+						KEY_PLANET_ONE + " TEXT, " +
+						KEY_PLANET_TWO + " TEXT, " + 
 						KEY_TRANSIT_ID + " TEXT, " + 
 						KEY_CONTENT + " TEXT, " + 
 						KEY_DEGREES + " TEXT, " + 
@@ -225,7 +186,17 @@ public class SQLiteHelper {
 		 cv.put(ColumnName, newValue);
 		 sqlitedb.update(TABLE_NAME, cv, Column + "= ?", new String[] {rowId});
 }
-	
+	 
+	 public void updateColumns(String tableName, ContentValues cv, String where, String whereArgs){	 
+		 sqlitedb.update(tableName, cv, KEY_ROW_ID + " = ?",
+		            new String[] { whereArgs });
+	 } 
+	 
+//		 public void updatePlanets(String tableName, cv){
+//			 sqlitedb.update(tableName, cv, null, whereArgs);
+//		 }
+
+	 
 	public void deleteTable(String tableName){
 		sqlitedb.delete(tableName, null, null);
 	}
@@ -281,8 +252,8 @@ public class SQLiteHelper {
 			   HashMap<String, String> map = new HashMap<String, String>();
 			   map = aspectArray.get(i);
 //				 planet_id1, planet_id2, transit_aspect_id, degrees, minutes, seconds, content
-			   cv3.put(KEY_PLANETID_ONE, map.get("planet_id1"));
-			   cv3.put(KEY_PLANETID_TWO, map.get("planet_id2"));
+			   cv3.put(KEY_PLANET_ONE, map.get("planet_id1"));
+			   cv3.put(KEY_PLANET_TWO, map.get("planet_id2"));
 			   cv3.put(KEY_TRANSIT_ID, map.get("transit_aspect_id"));
 			   cv3.put(KEY_DEGREES, map.get("degrees"));
 			   cv3.put(KEY_CONTENT, map.get("content"));  
@@ -309,7 +280,7 @@ public class SQLiteHelper {
 			c = sqlitedb.query(DB_TABLENAME_HOUSES, columns, null, null, null, null, null);
 		}
 		if(tableName==DB_TABLENAME_ASPECTS){
-			String[] columns = new String[]{ KEY_PLANETID_ONE, KEY_PLANETID_TWO, KEY_TRANSIT_ID,
+			String[] columns = new String[]{ KEY_PLANET_ONE, KEY_PLANET_TWO, KEY_TRANSIT_ID,
 					KEY_DEGREES, KEY_CONTENT, KEY_MINUTE_DEGREES, KEY_SECONDS_DEGREES};
 			c = sqlitedb.query(DB_TABLENAME_ASPECTS, columns, null, null, null, null, null);
 		}

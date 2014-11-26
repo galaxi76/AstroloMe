@@ -40,6 +40,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,6 +49,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -102,8 +105,10 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 	Button cancel;
 	Button done;
 	AutoCompleteTextView autoCompView;
+//	EditText autoCompView;
 	EditText nameET;
 	EditText emailET;
+	Button searchCity;
 	User user;
 	String cityIDSet;
 	String cityNameSet;
@@ -153,6 +158,8 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
          nameET = (EditText)findViewById(R.id.settingsName);
 		 emailET = (EditText)findViewById(R.id.settingsEmail);
 		 autoCompView = (AutoCompleteTextView)findViewById(R.id.settingsBirthLocTV);
+		 searchCity = (Button)findViewById(R.id.searchBtn);
+//		 autoCompView = (EditText)findViewById(R.id.settingsBirthLocTV);
 		 bdBtn = (Button)findViewById(R.id.settingsBirthday);
 		 bTimebtn = (Button)findViewById(R.id.settingsBirthTime);
 		 cancel = (Button)findViewById(R.id.settingsCancel);
@@ -187,6 +194,30 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 				}
 			});
 		 
+//		 searchCity.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				autoCompView.setAdapter(new AutoCompleteAdapter(SettingsActivity.this, R.layout.locations_list_item));
+//				autoCompView.setOnItemClickListener(new OnItemClickListener() {
+//
+//					@Override
+//					public void onItemClick(AdapterView<?> parent, View view,
+//							int position, long id) {
+//
+//						SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+//					    cityIDSet = settings.getString("key_bl_id", null);
+//					    cityNameSet = settings.getString("key_bl_name", null);
+//					    
+//						InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//					    in.hideSoftInputFromWindow(autoCompView.getWindowToken(), 0);
+//					    autoCompView.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+////					    emailET.requestFocus();
+//					}
+//				});
+//			}
+//		});
+		//TODO: make search button or listener for typing delay or have adapter wait between requests
 		 autoCompView.setAdapter(new AutoCompleteAdapter(this, R.layout.locations_list_item));
 		 autoCompView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -204,6 +235,21 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 //			    emailET.requestFocus();
 			}
 		});
+//		 autoCompView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//		        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//		            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+//		                    actionId == EditorInfo.IME_ACTION_DONE ||
+//		                    actionId == EditorInfo.IME_ACTION_GO ||
+//		                    
+//		                    event.getAction() == KeyEvent.ACTION_DOWN &&
+//		                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//
+//		            	autoCompView.setAdapter(new AutoCompleteAdapter(SettingsActivity.this, R.layout.locations_list_item));
+//		                return true;
+//		            }
+//		            return false;
+//		        }
+//		    });
 		 
 		 cancel.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -220,10 +266,12 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 				emailSet = emailET.getText().toString();
 				bdBtnText = bdBtn.getText().toString();
 				btBtnText = bTimebtn.getText().toString();
+				String bLocEntry = autoCompView.getText().toString();
 //				cal = Calendar.getInstance();
 				boolean isNameChange = !(user.getFull_name().equals(fullNameSet));
 				boolean isEmailChange = !(user.getEmail().equals(emailSet));
-				isLocChange = !(user.getBirth_location_id().equals(cityIDSet));
+				isLocChange = !(user.getBirth_location_name().equals(bLocEntry));
+//				isLocChange = !(user.getBirth_location_id().equals(cityIDSet));
 				isBDateChange = !(bdBtnText.equals(bDate));
 				boolean isBTimeChange = false;
 				if (populatedTime){
@@ -234,21 +282,26 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 					
 				 if (fullNameSet.matches("")){
 					 blinkText(nameET);
+					 return;
 				 }
 				 else if(bdBtnText.equals("")){
 					 blinkText(bdBtn);
+					 return;
 				 }
-				
-				 else if ((autoCompView.getText().equals("")) || (autoCompView.getText().equals(R.string.enterLoc))){
+				//TODO: break loop if one is found
+				 else if ((autoCompView.getText().toString().equals("")) || (autoCompView.getText().equals(R.string.enterLoc))){
 					    blinkText(autoCompView);
+					    return;
 					}	 
 				 else if(emailSet.matches("")){
 					 blinkText(emailET);
+					 return;
 				 }
 				 else if(!isEmailValid(emailSet)){
 					 Toast toast = Toast.makeText(getBaseContext(), "Please enter a valid email address", Toast.LENGTH_LONG);
 					 toast.setGravity(Gravity.CENTER, 0, -100);
 					 toast.show();
+					 return;
 				 }
 				 else if(birthIsTime.equals("0")){
 					 if(!isBTimeChange){
@@ -300,7 +353,7 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 //						dayBirth = cal.get(Calendar.DAY_OF_MONTH);
 				 }
 				 dobTimeStamp = componentTimeToTimestamp(yearBirth, monthBirth, dayBirth, hourBirth, minBirth);
-			
+				dob = Integer.toString(dobTimeStamp);
 					SharedPreferences sp = getSharedPreferences(PREFS_NAME, 0);
 					 SharedPreferences.Editor editor = sp.edit();
 				      editor.putString("key_email", emailSet);
@@ -385,20 +438,33 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 		if (cmd.equals(CMD_SAVE_SETTINGS)){
 			if (error.equals("no")){
 				if(isLocChange || isCompleteBDChange){
-					
+					//TODO: deicde what to show while calculating
+					Toast toast = Toast.makeText(activity, "Recalculating your Birth Chart", Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
 					getPlanets();
 					getHouses();
 					getAspects();
-					Toast.makeText(activity, "Recalculating your Birth Chart", Toast.LENGTH_LONG).show();
+					
 				}
 				else{
-					Toast.makeText(activity, "Changes Saved", Toast.LENGTH_SHORT).show();
+					Toast toast = Toast.makeText(activity, "Changes Saved", Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
 //					Intent intent = new Intent(activity, MainFragmentActivity.class);
 //					intent.putExtra("calling-activity", "SettingsActivity");
 //					startActivity(intent);
 //					saveSettingsLocalDB(result);
 					finish();
 				}
+				
+				ContentValues cv = new ContentValues();
+				cv.put(KEY_NAME, fullNameSet);
+				cv.put(KEY_EMAIL, emailSet);
+				cv.put(KEY_DOB, dob);
+				cv.put(KEY_BIRTH_LOCAL_ID, cityIDSet);
+				SaveToLocalDBHelper save = new SaveToLocalDBHelper(activity, cv);
+				save.updateUserLocalDB();
 			}
 		} 
 		if (cmd.equals(CMD_BC)){
@@ -408,18 +474,22 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 			if (gotWhat.equals(PLANET_ID)) {
 				SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 						activity, result, PLANET_ID);
-				save.saveBirthChartLocalDB();
+				save.parseThatShit();
+				save.updateBirthChartLocalDB();
 			}
 
 			if (gotWhat.equals(HOUSE_ID)) {
 				SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 						activity, result, HOUSE_ID);
-				save.saveBirthChartLocalDB();
+				save.parseThatShit();
+				save.updateBirthChartLocalDB();
 			}
 			if (gotWhat.equals(TRANSIT_ID)) {
 				SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 						activity, result, TRANSIT_ID);
-				save.saveBirthChartLocalDB();
+				save.parseThatShit();
+				save.updateBirthChartLocalDB();
+				
 //				Intent intent = new Intent(activity, MainFragmentActivity.class);
 //				intent.putExtra("calling-activity", "SettingsActivity");
 //				startActivity(intent);
@@ -431,7 +501,6 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 	
 	private void updateSettings() {
 		chngSettingsParams = new ArrayList<NameValuePair>();
-		dob = Integer.toString(dobTimeStamp);
 		chngSettingsParams.add(new BasicNameValuePair("apiver", "1"));
 		chngSettingsParams.add(new BasicNameValuePair("apikey", API_KEY));
 		chngSettingsParams.add(new BasicNameValuePair("cmd", CMD_SAVE_SETTINGS));
@@ -497,30 +566,7 @@ public class SettingsActivity extends FragmentActivity implements ResponseManage
 		manager.execute(aspectParams);
 	}
 
-	private void saveSettingsLocalDB(HashMap<String, String> result) {
-		
-		boolean isSavedLocDB=false;
-		
-		try{
-			SQLiteHelper saveEntry = new SQLiteHelper(activity);
-			saveEntry.open();
-			
-			saveEntry.updateOneColumn(DB_TABLENAME_USER, null, null, KEY_NAME, nameET.getText().toString());
-			saveEntry.updateOneColumn(DB_TABLENAME_USER, null, null, KEY_DOB, bdBtn.getText().toString());
-			saveEntry.updateOneColumn(DB_TABLENAME_USER, null, null, KEY_BIRTH_LOCAL_ID, autoCompView.getText().toString());
-			saveEntry.updateOneColumn(DB_TABLENAME_USER, null, null, KEY_EMAIL, emailET.getText().toString());
-			saveEntry.close();
-			isSavedLocDB = true;
-		}catch(Exception e){
-			Log.i("SQLITEDB", "not uploaded into local db", e);
-			isSavedLocDB = false;
-		}finally{
-			if(isSavedLocDB){
-				Toast.makeText(activity, "Changes Saved", Toast.LENGTH_LONG).show();
-			}
-		}
-	
-	}
+
 	public boolean isNetworkAvailable() {
 	    ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

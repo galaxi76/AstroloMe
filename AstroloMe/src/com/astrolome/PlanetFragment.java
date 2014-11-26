@@ -68,16 +68,6 @@ public class PlanetFragment extends ListFragment{
        inflater=(LayoutInflater)getLayoutInflater(savedInstanceState);
        activity = getActivity();
        
-//       ImageView settings = (ImageView)v.findViewById(R.id.settingsBtn);
-//		settings.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(getActivity(), SettingsActivity.class);
-//				startActivity(intent);
-//			}
-//			});
-       
        String dbTableName = "Table_Planets";
 		 SQLiteHelper info = new SQLiteHelper(getActivity().getBaseContext());		
 		 info.open();
@@ -95,7 +85,9 @@ public class PlanetFragment extends ListFragment{
 				 planetMap.put(CONTENT, datafromSQL.get(i).get(KEY_CONTENT));
 				 
 				 planetListArray.add(planetMap);
+				 
 		 	}	
+			 Log.i("PLANET MAP BEFORE", planetListArray.toString());
 			 info.close();
 		 }
 
@@ -146,4 +138,11 @@ public class PlanetFragment extends ListFragment{
 //		}
   
 	 }
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	}
+	 
 }

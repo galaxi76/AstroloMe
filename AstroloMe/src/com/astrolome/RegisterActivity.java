@@ -34,6 +34,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -62,7 +64,6 @@ import android.widget.Toast;
 import com.astrolome.DatePickerFragment;
 
 public class RegisterActivity extends FragmentActivity implements ResponseManager{
-	//test checkin number 2 - working copy
 	Activity activity = this;
 	boolean is24hourFormat;
 	String deviceVersion;
@@ -151,6 +152,7 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 		 register = (Button)findViewById(R.id.done);
 	     bday = (Button)findViewById(R.id.birthday);
 	     birthTime = (Button)findViewById(R.id.birthtime);
+	     Button citySearch = (Button)findViewById(R.id.searchBtn);
 	     citySugg = (AutoCompleteTextView) findViewById(R.id.birthLocTV);
 	     
 	     nameET.setOnEditorActionListener(new OnEditorActionListener() {
@@ -163,7 +165,16 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 					return false;
 				}
 			});
-
+	     
+//	     citySearch.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				
+//				
+//			}
+//		});
+	     //TODO: make search button or listener for typing delay or have adapter wait between requests
 	     citySugg.setAdapter(new AutoCompleteAdapter(this, R.layout.locations_list_item));
 	     citySugg.setOnItemClickListener(new OnItemClickListener() {
 
@@ -336,14 +347,10 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 		
 
 	private void register() {
-		
-		
+			
 				startAcceleration();
-		 
 				
-				
-				gender = "2";
-								
+				gender = "2";				
 //			    birthLocID = user.getBirth_location_id();
 			    dob = Integer.toString(dobTimeStamp);
 				
@@ -367,6 +374,10 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 			    manager = new RequestManager(URL_REG, this, registerParams);
 		 		manager.delegate = this;
 		 		manager.execute(registerParams);
+		 		
+				Toast toast = Toast.makeText(activity, "Signing you up", Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
 	}
    
 	
@@ -382,7 +393,7 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 //        view.startAnimation(anim);			
 		
 	}
-
+	//TODO: fix time change - it's getting f*d cause of locality?
 	private int componentTimeToTimestamp(int yearBirth2, int monthBirth2,
 			int dayBirth2, int hourBirth2, int minBirth2) {
 		 Calendar c = Calendar.getInstance();
@@ -413,8 +424,9 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 		if (cmd.equals(CMD_REG)) {
 
 			if (error.equals("no")) {
-//				Toast.makeText(activity, "Your user id: " + result.get("user_id"),
-//						Toast.LENGTH_SHORT).show();
+				Toast toast = Toast.makeText(activity, "Logging you in", Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
 				saveRegLocalDB(result);
 			}
 			if (error.equals("dob")) {
@@ -423,6 +435,9 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 			}
 		}
 		if (cmd.equals(CMD_LOGIN)){
+			Toast toast = Toast.makeText(activity, "Calculating your Birth Chart", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
 			
 			String errorValue = result.get(ERROR);
 			String timeStamp = result.get(TIMESTAMP);
@@ -452,19 +467,24 @@ public class RegisterActivity extends FragmentActivity implements ResponseManage
 				gotWhat = user.getHouseID(resultArrayString);// to see if planet/house/aspect was selected
 
 				if (gotWhat.equals(PLANET_ID)) {
+					
 					SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 							activity, result, PLANET_ID);
+					save.parseThatShit();
 					save.saveBirthChartLocalDB();
 				}
 
 				if (gotWhat.equals(HOUSE_ID)) {
+					
 					SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 							activity, result, HOUSE_ID);
+					save.parseThatShit();
 					save.saveBirthChartLocalDB();
 				}
 				if (gotWhat.equals(TRANSIT_ID)) {
 					SaveToLocalDBHelper save = new SaveToLocalDBHelper(
 							activity, result, TRANSIT_ID);
+					save.parseThatShit();
 					save.saveBirthChartLocalDB();
 					Intent mainIntent = new Intent(activity,
 							MainFragmentActivity.class);

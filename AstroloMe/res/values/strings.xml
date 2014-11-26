@@ -16,7 +16,7 @@
    <string name="spinningZodiac">spinningZodiac</string>
    <string name="login">Login</string>
    <string name="calculating">Calculating your Birth Chart</string>
-   <string name="enterLoc">Please enter your city of birth</string>
+   <string name="enterLoc">Please enter your birth city</string>
    <string name="bdayMissing">Please enter your birth date</string>
     <string name="enterEmail">Please enter your email</string>
     <string name ="myBirthchartHeading">MY BIRTHCHART</string>
@@ -34,4 +34,5 @@
      <string name="marsAriesExpl">Mars 4 degrees Aries</string>
      <string name="myHousesHeading">MY HOUSES</string>
      <string name="settingsBirthTimeExpl">Your ascendant cannot be calculated without your birth time</string>
+     <string name="search">Search</string>
 </resources>

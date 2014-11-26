@@ -6,6 +6,8 @@ public class Constants {
 	
 	public static final String DB_TABLENAME_USER = "Table_User";
 	public static final String DB_TABLENAME_PLANETS = "Table_Planets";
+	public static final String DB_TABLENAME_HOUSES = "Table_Houses";
+	public static final String DB_TABLENAME_ASPECTS = "Table_Aspects";
 	//NEW
 	public static final String API_KEY = "72965fa00022-dbdb-3e11-2738-55Gb9dF7";
 	public static final String PREFS_NAME = "birth time and loc";
@@ -44,6 +46,7 @@ public class Constants {
 	
 	public final static int SPLASH_DISPLAY_LENGTH = 2000;
 	
+	//User
 	public final static String KEY_ROW_ID = "_rowID";
 	public final static String KEY_UID = "_id";
 	public final static String KEY_DEVICE_UID = "_deviceuid";
